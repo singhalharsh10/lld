@@ -1,7 +1,7 @@
 package com.harsh.doctorappointment.entity;
 
 public class Appointment {
-
+    private Integer id;
     private Patient patient;
     private Doctor doctor;
     private TimeSlot timeSlot;

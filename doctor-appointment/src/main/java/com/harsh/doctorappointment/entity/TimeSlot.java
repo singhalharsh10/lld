@@ -10,19 +10,19 @@ import lombok.Setter;
 @NoArgsConstructor
 public class TimeSlot {
 
-    private double startTime;
-    private double endTime;
+    private Double startTime;
+    private Double endTime;
 
-    public TimeSlot(double startTime, double endTime) {
+    public TimeSlot(Double startTime, Double endTime) {
         this.startTime = startTime;
         this.endTime = endTime;
     }
 
-    public double getStartTime() {
+    public Double getStartTime() {
         return startTime;
     }
 
-    public double getEndTime() {
+    public Double getEndTime() {
         return endTime;
     }
 
