@@ -40,11 +40,12 @@ public class Driver {
 
         // Show Available Slots by Speciality
         System.out.println("Available Cardiologist Slots:");
-        appointmentService.g(Speciality.CARDIOLOGIST)
-                .forEach(slot -> System.out.println("Dr.Curious: (" + slot.() + "-" + slot.getEndHour() + ")"));
+        appointmentService.getAvailableSlotsBySpeciality(Speciality.CARDIOLOGIST)
+                .forEach(slot -> System.out.println("Dr.Curious: (" + slot.getStartTime() + "-" + slot.getEndTime() + ")"));
 
+        TimeSlot slot = new TimeSlot(12.5,13);
         // Book Appointment
-        String bookingResult = appointmentService.bookAppointment("PatientA", "Curious", new TimeSlot(12.5, 13));
+        String bookingResult = appointmentService.bookAppointment("PatientA", "Curious", slot);
         System.out.println(bookingResult);
 
         // Cancel Appointment

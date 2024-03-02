@@ -22,7 +22,7 @@ public class AppointmentService {
         doctors.add(doctor);
     }
 
-    public void markDoctorAvailability(String doctorName, int startTime, int endTime) {
+    public void markDoctorAvailability(String doctorName, double startTime, int endTime) {
         Doctor doctor = findDoctorByName(doctorName);
         TimeSlot timeSlot = new TimeSlot(startTime, endTime);
         doctor.addAvailability(timeSlot);
@@ -35,7 +35,7 @@ public class AppointmentService {
                 availableSlots.addAll(doctor.getAvailability());
             }
         }
-        availableSlots.sort(Comparator.comparingInt(TimeSlot::getStartTime));
+        availableSlots.sort(Comparator.comparingDouble(TimeSlot::getStartTime));
         return availableSlots;
     }
 
@@ -46,13 +46,12 @@ public class AppointmentService {
                 availableSlots.addAll(doctor.getAvailability());
             }
         }
-        availableSlots.sort(Comparator.comparingInt(TimeSlot::getStartTime));
+        availableSlots.sort(Comparator.comparingDouble(TimeSlot::getStartTime));
         return availableSlots;
     }
 
-    public int bookAppointment(String patientName, String doctorName, int startTime, int endTime) {
+    public int bookAppointment(String patientName, String doctorName, TimeSlot timeSlot) {
         Doctor doctor = findDoctorByName(doctorName);
-        TimeSlot timeSlot = new TimeSlot(startTime, endTime);
 
         if (isSlotAvailable(doctor, timeSlot)) {
             Patient patient = findOrCreatePatient(patientName);

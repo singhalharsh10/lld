@@ -1,20 +1,28 @@
 package com.harsh.doctorappointment.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
 public class TimeSlot {
 
-    private int startTime;
-    private int endTime;
+    private double startTime;
+    private double endTime;
 
-    public TimeSlot(int startTime, int endTime) {
+    public TimeSlot(double startTime, double endTime) {
         this.startTime = startTime;
         this.endTime = endTime;
     }
 
-    public int getStartTime() {
+    public double getStartTime() {
         return startTime;
     }
 
-    public int getEndTime() {
+    public double getEndTime() {
         return endTime;
     }
 
