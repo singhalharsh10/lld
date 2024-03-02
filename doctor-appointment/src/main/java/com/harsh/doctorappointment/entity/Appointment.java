@@ -6,7 +6,8 @@ public class Appointment {
     private Doctor doctor;
     private TimeSlot timeSlot;
 
-    public Appointment(Patient patient, Doctor doctor, TimeSlot timeSlot) {
+    public Appointment(Integer id, Patient patient, Doctor doctor, TimeSlot timeSlot) {
+        this.id = id;
         this.patient = patient;
         this.doctor = doctor;
         this.timeSlot = timeSlot;

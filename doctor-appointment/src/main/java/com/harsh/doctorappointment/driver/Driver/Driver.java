@@ -1,5 +1,6 @@
 package com.harsh.doctorappointment.driver.Driver;
 
+import com.harsh.doctorappointment.entity.Appointment;
 import com.harsh.doctorappointment.entity.Speciality;
 import com.harsh.doctorappointment.entity.TimeSlot;
 import com.harsh.doctorappointment.service.AppointmentService;
@@ -30,7 +31,6 @@ public class Driver {
         // Register Doctors
         appointmentService.registerDoctor("Harsh", Speciality.CARDIOLOGIST);
         appointmentService.registerDoctor("Soumen", Speciality.DERMATOLOGIST);
-        appointmentService.registerDoctor("Flipkart", Speciality.DERMATOLOGIST);
 
         List<TimeSlot> harshAvailability = Arrays.asList(
                 new TimeSlot(9.5, 10.0),
@@ -38,27 +38,16 @@ public class Driver {
                 new TimeSlot(16.0, 16.5)
         );
 
-        // Mark Doctor Availability
-//        List<TimeSlot> harshAvailability = Arrays.asList(
-//                // Taking input from user 9:00-9:30 .split(
-//                convertToTimeSlot("9:00-9:30"),
-//        convertToTimeSlot("12:30-13:00"),
-//        convertToTimeSlot("16:00-16:30")
-//        );
+
         appointmentService.markDoctorAvailability("Harsh", harshAvailability);
 
-//        List<TimeSlot> soumenAvailability = Arrays.asList(
-//                new TimeSlot(9.5, 10),
-//                new TimeSlot(12.5, 13),
-//                new TimeSlot(16, 16.5)
-//        );
-//        appointmentService.markDoctorAvailability("Soumen", soumenAvailability);
-//
-//        List<TimeSlot> flipkartAvailability = Arrays.asList(
-//                new TimeSlot(11.5, 12),
-//                new TimeSlot(14, 14.5)
-//        );
-//        appointmentService.markDoctorAvailability("Flipkart", flipkartAvailability);
+        List<TimeSlot> soumenAvailability = Arrays.asList(
+                new TimeSlot(9.5, 10.0),
+                new TimeSlot(12.5, 13.0),
+                new TimeSlot(16.0, 16.5)
+        );
+        appointmentService.markDoctorAvailability("Soumen", soumenAvailability);
+
 
         // Show Available Slots by Speciality
         System.out.println("Available Cardiologist Slots:");
@@ -67,17 +56,34 @@ public class Driver {
 
         TimeSlot slot = new TimeSlot(12.5,13.0);
         // Book Appointment
-        int bookingResult = appointmentService.bookAppointment("PatientA", "Harsh", slot);
+        int bookingResult = appointmentService.bookAppointment(1234,"PatientA", "Harsh", slot);
         System.out.println(bookingResult);
+
+//
+//        int result = appointmentService.bookAppointment(2345,"PatientA", "Soumen", slot);
+//        System.out.println(result);
+
+
 
         System.out.println("Available Cardiologist Slots:");
         appointmentService.getAvailableSlotsBySpeciality(Speciality.CARDIOLOGIST)
                 .forEach(slot1 -> System.out.println("Dr.Harsh: (" + slot1.getStartTime() + "-" + slot1.getEndTime() + ")"));
 
-        // Cancel Appointment
-//        appointmentService.cancelBooking( );
+//        Cancel Appointment
+//        appointmentService.cancelBooking(1234 );
 
 
+        System.out.println("Available Cardiologist Slots:");
+        appointmentService.getAvailableSlotsBySpeciality(Speciality.CARDIOLOGIST)
+                .forEach(slot1 -> System.out.println("Dr.Harsh: (" + slot1.getStartTime() + "-" + slot1.getEndTime() + ")"));
+
+
+
+        List<Appointment> appointments = appointmentService.seeAppointments("Harsh", true);
+        appointments.forEach(appointment -> {
+            System.out.println(appointment.getTimeSlot().getStartTime());
+            System.out.println(appointment.getTimeSlot().getEndTime());
+        });
 
     }
 }
