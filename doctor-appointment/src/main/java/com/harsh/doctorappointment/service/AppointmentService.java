@@ -22,10 +22,13 @@ public class AppointmentService {
         doctors.add(doctor);
     }
 
-    public void markDoctorAvailability(String doctorName, double startTime, int endTime) {
+    public void markDoctorAvailability(String doctorName,List<TimeSlot>slots) {
         Doctor doctor = findDoctorByName(doctorName);
-        TimeSlot timeSlot = new TimeSlot(startTime, endTime);
-        doctor.addAvailability(timeSlot);
+        slots.forEach(slot->{
+            assert doctor != null;
+            doctor.addAvailability(slot);
+        });
+
     }
 
     public List<TimeSlot> showAvailabilityBySpeciality(String speciality) {
@@ -132,8 +135,9 @@ public class AppointmentService {
         Queue<Patient> waitQueue = waitlist.get(doctorName);
         if (waitQueue != null && !waitQueue.isEmpty()) {
             Patient nextPatient = waitQueue.poll();
-            markDoctorAvailability(doctorName, nextPatient.getAppointments().get(0).getTimeSlot().getStartTime(),
+            TimeSlot slot = new  TimeSlot(nextPatient.getAppointments().get(0).getTimeSlot().getStartTime(),
                     nextPatient.getAppointments().get(0).getTimeSlot().getEndTime());
+            markDoctorAvailability(doctorName, (List<TimeSlot>) slot);
         }
     }
 }

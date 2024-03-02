@@ -45,9 +45,9 @@ public class Driver {
 
         TimeSlot slot = new TimeSlot(12.5,13);
         // Book Appointment
-        String bookingResult = appointmentService.bookAppointment("PatientA", "Curious", slot);
+        int bookingResult = appointmentService.bookAppointment("PatientA", "Curious", slot);
         System.out.println(bookingResult);
-
+        .
         // Cancel Appointment
         appointmentService.cancelBooking( 1234);
 
